@@ -2,42 +2,36 @@ import java.util.*;
 
 public class SnakeLadder {
     public static void main(String[] args){
-        int p1 = 0;
-        int no_rolls = 0;
-        while (p1 != 100) {
+        int cp = 1;
+        int[] pos = {0, 0};
+        boolean won = false;
+        while (!won) {
             int roll_die = (int) ((Math.random()*10) % 6);
             if (roll_die == 0){
                 roll_die = 6;
             }
-            if ((p1+roll_die) > 100){
-                continue;
-            }
-            p1 += roll_die;
             String option = getRandomOption();
             switch (option) {
                 case "No Play":
                     break;
                 case "Ladder":
-                    if ((p1+roll_die) > 100) {
-                        break;
+                    pos[cp-1] += roll_die;
+                    if (pos[cp-1] == 100){
+                        won = true;
+                        System.out.println("Player"+ cp +" wins!");
                     }
-                    p1 += roll_die;
-                    break;
+                    continue;
                 case "Snake":
-                    p1 -= roll_die;
-                    if (p1 < 0) {
-                        p1 = 0;
+                    pos[cp-1] -= roll_die;
+                    if (pos[cp-1] <0){
+                        pos[cp-1] =0;
                     }
                     break;
                 default:
                     System.out.println("Invalid option");
-
             }
-            System.out.println("Outcome: "+ p1);
-            no_rolls += 1;
+            cp = (cp % 2) +1;
         }
-        System.out.println("It Reached at position "+ p1);
-        System.out.println("No of times dice rolled are: "+ no_rolls);
     }
     private static String getRandomOption() {
         String[] options = {"No Play", "Ladder", "Snake"};
