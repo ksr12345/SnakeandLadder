@@ -3,6 +3,7 @@ import java.util.*;
 public class SnakeLadder {
     public static void main(String[] args){
         int p1 = 0;
+        int no_rolls = 0;
         while (p1 != 100) {
             int roll_die = (int) ((Math.random()*10) % 6);
             if (roll_die == 0){
@@ -30,10 +31,13 @@ public class SnakeLadder {
                     break;
                 default:
                     System.out.println("Invalid option");
+
             }
             System.out.println("Outcome: "+ p1);
+            no_rolls += 1;
         }
         System.out.println("It Reached at position "+ p1);
+        System.out.println("No of times dice rolled are: "+ no_rolls);
     }
     private static String getRandomOption() {
         String[] options = {"No Play", "Ladder", "Snake"};
