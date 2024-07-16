@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class SnakeLadder {
     public static void main(String[] args){
         int p1 = 0;
@@ -19,6 +21,29 @@ public class SnakeLadder {
             System.out.println("Outcome: "+ 6);
         }
         p1 += roll_die;
+        String option = getRandomOption();
+        switch (option) {
+            case "No Play":
+                break;
+            case "Ladder":
+                p1 += roll_die;
+                break;
+            case "Snake":
+                p1 -= roll_die;
+                if (p1 < 0) {
+                    p1 = 0;
+                }
+                break;
+            default:
+                System.out.println("Invalid option");
+        }
+
         System.out.println("New Position: "+ p1);
+    }
+    private static String getRandomOption() {
+        String[] options = {"No Play", "Ladder", "Snake"};
+        Random random = new Random();
+        int index = random.nextInt(options.length);
+        return options[index];
     }
 }
